@@ -1,0 +1,150 @@
+// Remy function
+@function remy($value, $base: 16px) {
+  @return ($value / $base) * 1rem;
+}
+
+// Variables
+$color-primary: #039be5;
+$color-secondary: #eee;
+$jetBlack: #343434;
+$radius: 4px;
+
+// Base
+html {
+  font-size: 16px;
+}
+
+body {
+  font-size: 100%;
+  font-family: 'Roboto', arial, sans-serif;
+  background: #f9f9f9;
+}
+
+// Custom styles
+#root {
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  max-width: remy(420px);
+  background: #fff;
+  border-radius: $radius;
+  box-shadow: 0 1px 3px rgba(0,0,0,.025), 0 3px 6px rgba(0,0,0,.065);
+}
+
+.app-header {
+  position: relative;
+  //min-height: remy(260px);
+}
+
+h1 {
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.input-group .form-control:not(:last-child) {
+  padding-top: .6rem;
+  padding-bottom: .6rem;
+  width: 70%;
+  border-bottom: 0;
+  border-left: 0;
+  border-color: $color-secondary;
+}
+
+.input-group-addon {
+  padding-top: 10.5px;
+  padding-bottom: 10.5px;
+  min-width: remy(80px);
+  width: 30%;
+  color: #fff;
+  background-color: $color-primary;
+  border: 0;
+  border-radius: 0;
+  
+  &:focus {
+    outline: 0;
+  }
+}
+
+.fullyLoaded .task-list {
+  opacity: 1;
+  transition-duration: 1.6s;
+}
+
+.task-list {
+  opacity: 0;
+  padding: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+.task-item {
+  padding-top: 0.75rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  width: 100%;
+  background: #fff;
+  cursor: default;
+  border-top: 1px solid $color-secondary;
+  
+  &:last-of-type {
+    border-bottom: 1px solid $color-secondary;
+  }
+}
+
+.task-remover {
+  line-height: 1.45;
+  color: #ddd;
+  cursor: pointer;
+  transition: color .25s ease-in-out;
+  
+  &:focus,
+  &:hover {
+    color: #e53935;
+  }
+}
+
+.fullyLoaded .loadingScreen {
+  opacity: 0;
+  z-index: -99;
+}
+
+.loadingScreen {
+  transition-duration: .6s;
+  opacity: 1;
+  background-color: #e2e2e2;
+  .text {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    span {
+      font-size: 30px;
+      animation: loading 2s infinite;
+      color: $jetBlack;
+      @for $i from 2 through 7 {
+        &:nth-of-type(#{$i}) {
+          animation-delay: 0s + $i / 10;
+        }
+      }
+    }
+  }
+}
+@keyframes loading {
+  0% {
+    font-size: 30px;
+  }
+  25% {
+    font-size: 38px;
+  }
+  50% {
+    font-size: 22px;
+  }
+  100% {
+    font-size: 30px;
+  }
+}
